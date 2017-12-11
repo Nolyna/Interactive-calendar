@@ -1,3 +1,4 @@
+
 <?php
 	if(isset($_POST['func']) && !empty($_POST['func'])){
 		switch($_POST['func']){
@@ -19,21 +20,24 @@
 		$boxDisplay = ($totalMonthDisplay <= 35)?35:42;
 ?>
 
-<div id="calender_section">
-	<h2>
-       	<a 
+<div class="calender_section">
+	<ul>
+       	   <li>
+             <a 
 			href="javascript:void(0);" 
 			onclick="getCal('calen','<?php echo date("Y",strtotime($date.' - 1 Month')); ?>','<?php echo date("m",strtotime($date.' - 1 Month')); ?>');">&lt;
 		</a>
-        <select name="monthDropdown" class="monthDropdown dropdown"><?php echo monthList($dMonth); ?></select>
+                <select name="monthDropdown" class="monthDropdown dropdown"><?php echo monthList($dMonth); ?></select>
 		<select name="yearDropdown" class="yearDropdown dropdown"><?php echo yearList($dYear); ?></select>
-        <a 
+              <a 
 			href="javascript:void(0);" 
 			onclick="getCal('calen','<?php echo date("Y",strtotime($date.' + 1 Month')); ?>','<?php echo date("m",strtotime($date.' + 1 Month')); ?>');">&gt;
 		</a>
-    </h2>
-	<div id="calender_section_top">
-		<ul>
+            </li>
+         </ul>
+</div>
+        
+		<ul class="weekday">
 			<li>Sunday</li>
 			<li>Monday</li>
 			<li>Tuesday</li>
@@ -41,12 +45,12 @@
 			<li>Thursday</li>
 			<li>Friday</li>
 			<li>Saturday</li>
-		</ul>
-	</div>
-	<div id="calender_section_bot">
-		<ul>
-			<?php 
-				$count = 1; 
+		</ul> 
+
+		<ul class="date">
+	        <li>		
+                    <?php 
+        				$count = 1; 
 				for($i=1;$i<=$boxDisplay;$i++){
 					if(($i >= $currentMonth+1 || $currentMonth == 7) && $i <= ($totalMonthDisplay)){
 						$currentDate = $dYear.'-'.$dMonth.'-'.$count;
@@ -61,9 +65,8 @@
 			?>
 			<li><span>&nbsp;</span></li>
 			<?php } } }?>
-		</ul>
-	</div>
-</div>
+		</li>
+                </ul>
 
 <script type="text/javascript">
 	function getCal(div,year,month){
